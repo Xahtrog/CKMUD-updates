@@ -1,0 +1,4 @@
+Drop .tt (TinTin) and .lua scripts in this folder, then Plugins -> Reload all in the client.
+Mudlet .mpackage / CMUD .pkg files don't go here directly - import them from inside the client:
+TOOLS -> Plugins -> Import...  (the converted .lua lands here automatically)
+
