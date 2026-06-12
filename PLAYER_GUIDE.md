@@ -73,6 +73,14 @@ client, and they're live. This is how you share scripts with clanmates —
 one file, drop it in, done. Your imported and downloaded scripts stay put
 through client updates.
 
+Three levels of on/off, all in the Plugins window (hover any button
+for a description): the **group ⏻** disables a whole folder, the
+**file ⏻** disables one file, and **≡⏻** opens a list of every single
+trigger and alias inside a file with its own switch — click a name to
+preview its script, ✎ to open the file in the editor. Per-trigger
+choices apply instantly, stick per character, survive re-imports, and
+follow you via Profile sync.
+
 ## Importing Mudlet packages
 
 If you have a Mudlet `.mpackage` (like the CK package), don't unzip it —
@@ -86,6 +94,11 @@ single command until you arm them. Type `cksafe` to see the toggles —
 helper commands once a package is loaded: `cksafe` (bot switches),
 `ckaliases` (every alias it added), `cktriggers` (every trigger, with
 status).
+
+CMUD `.pkg` files import the same way. Each CMUD class folder becomes
+its own file (with `zsafe` class toggles), and triggers that weren't in
+any class are sorted into `_root_a` … `_root_z` files so even a huge
+flat CMUD tree stays browsable.
 
 ## Dock mode — your own capture windows (desktop)
 
@@ -107,7 +120,13 @@ Dock mode brings them back:
    to merge them; drag it to a pane's **edge** to split a new
    row/column; drag the **dividers** to resize; **×** closes a pane
    (its text returns to the terminal with the `[window]` prefix).
-5. Your layout is remembered per character on this PC, and your
+   Hover any pane button for a reminder of what it does.
+5. **✎** renames a pane. **⚙ → Buttons…** adds your own buttons to it:
+   one-click commands/aliases, or two-state toggles (label `Task`,
+   ON-command `zsafe Tasks on`, OFF-command `zsafe Tasks off`) that
+   show `[ON]`/`[OFF]` and light up — CMUD-style control buttons,
+   with an adjustable size slider.
+6. Your layout is remembered per character on this PC, and your
    routing (which windows show what) follows you to other PCs via
    Profile sync.
 
@@ -135,11 +154,22 @@ only the program files are replaced. If anything ever looks wrong after an
 update, your scripts are still in `plugins\` and your settings in
 `prefs.json`; nothing is deleted.
 
+Updates also back up the version they replace into a **"BU dont
+delete"** folder. If a new build misbehaves, open **⬆ Update** and
+click **⏪ Revert** — the app restarts on the previous version. The
+updater then flags that exact build with a warning so you don't
+re-install it by accident; updating becomes one click again as soon as
+a newer build ships. Updates are always manual — nothing installs by
+itself.
+
 ## Playing on your phone
 
 There's an Android client too, with the same engine — scripts, triggers,
-Mudlet imports, themes, and multi-character play, plus touch extras like
-the dual joystick and a hotbar. Ask in OOC for the current download link.
+Mudlet/CMUD imports, themes, and multi-character play, plus touch extras
+like the dual joystick and a hotbar. The Plugins window has the same
+folder tree and per-trigger ≡⏻ switches as desktop, and your switch
+choices sync between phone and PC. Ask in OOC for the current download
+link.
 
 ## Stuck?
 
