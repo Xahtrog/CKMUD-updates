@@ -87,6 +87,34 @@ helper commands once a package is loaded: `cksafe` (bot switches),
 `ckaliases` (every alias it added), `cktriggers` (every trigger, with
 status).
 
+## Dock mode — your own capture windows (desktop)
+
+If you came from CMUD, you probably had `#capture` windows — named
+panes that collect specific lines (chat, quest spam, score output).
+Dock mode brings them back:
+
+1. **Settings → Dock mode** (per character). Off by default; with it
+   off the client behaves exactly as before.
+2. Play. The first time a script writes to a window — `#capture solar`,
+   `#win ckstat ...` from an imported CMUD package, or
+   `cecho("mywin", ...)` from a Mudlet one — that window's pane
+   **creates itself** in place of the chat panel. No configuration.
+3. Click **⚙** on any pane to tick what it shows: any capture window
+   plus every chat channel (`OOC`, `Clan`, `Tell`, …). Want all chats
+   in one window? Make a pane and tick them all. In dock mode chats
+   are plain text lines — no bubbles, no tell dropdown.
+4. Arrange with the mouse: drag a pane's **header onto another pane**
+   to merge them; drag it to a pane's **edge** to split a new
+   row/column; drag the **dividers** to resize; **×** closes a pane
+   (its text returns to the terminal with the `[window]` prefix).
+5. Your layout is remembered per character on this PC, and your
+   routing (which windows show what) follows you to other PCs via
+   Profile sync.
+
+Anything you never route to a pane keeps printing in the terminal as
+`[window] text`, so a half-set-up dock never loses anything. `#clr
+<window>` clears that pane.
+
 ## Profile sync — take everything with you
 
 Settings → **Profile sync**. Sign in once with your ckmud.kaigin.com

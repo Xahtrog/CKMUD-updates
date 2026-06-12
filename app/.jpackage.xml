@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <jpackage-state version="21.0.11" platform="windows">
-  <app-version>1.0.81</app-version>
+  <app-version>1.0.83</app-version>
   <main-launcher>CKMud</main-launcher>
   <main-class>com.ckmud.desktop.MainKt</main-class>
   <signed>false</signed>
