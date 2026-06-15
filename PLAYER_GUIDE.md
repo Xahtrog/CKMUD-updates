@@ -136,7 +136,7 @@ Anything you never route to a pane keeps printing in the terminal as
 
 ## Profile sync — take everything with you
 
-Settings → **Profile sync**. Sign in once with your ckmud.kaigin.com
+Settings → **Profile sync**. Sign in once with your ckmud.com
 website account and you can **Push** this device's scripts, channels,
 themes and settings to your profile, then **Pull** them onto any other
 device — phone to desktop and back. You pick exactly what to transfer
