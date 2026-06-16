@@ -232,13 +232,11 @@ confirm it, then choose what it does:
 Your shortcuts are listed right there, each with a **✕** to remove it, plus a
 **Reset all** if you want to start over.
 
-One rule keeps it out of your way: a **bare key** (like just **1**) fires when
-your command line is **empty** — its normal resting state between commands —
-so you just press the key, no clicking-away needed. Once you've started typing
-a command (the input has text), **1** types normally so you can still write
-things like `kill 2.goblin`. Combos that use **Ctrl / Alt** fire any time.
-(Shift on its own counts as a bare key, so **Shift+2** still types **@** while
-you're writing.) Keybindings are saved per character and travel with
+One rule keeps it simple: a **bound key always fires its action and never
+types** into the command line. So bind keys you don't normally type as text —
+the **numpad** is perfect (you type with the top-row numbers, not the numpad),
+along with **F-keys** and **Ctrl / Alt** combos. Any key you *haven't* bound
+types as normal. Keybindings are saved per character and travel with
 **Profile sync**.
 
 ## Profile sync — take everything with you
