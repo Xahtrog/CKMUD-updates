@@ -154,14 +154,22 @@ Dock mode brings them back:
 
 1. **Settings → Dock mode** (per character). Off by default; with it
    off the client behaves exactly as before.
-2. Play. The first time a script writes to a window — `#capture solar`,
-   `#win ckstat ...` from an imported CMUD package, or
-   `cecho("mywin", ...)` from a Mudlet one — that window's pane
-   **creates itself** in place of the chat panel. No configuration.
-3. Click **⚙** on any pane to tick what it shows: any capture window
-   plus every chat channel (`OOC`, `Clan`, `Tell`, …). Want all chats
-   in one window? Make a pane and tick them all. In dock mode chats
-   are plain text lines — no bubbles, no tell dropdown.
+2. **Make a window — two ways:**
+   - **By hand (no script needed).** With dock mode on and no windows yet,
+     the empty dock shows **[ ➕ New window ]** (a blank pane you fill via ⚙)
+     and **[ ➕ New chat window — all channels combined ]** (one pane
+     pre-loaded with every chat channel). From any pane's **⚙** you can also
+     pick **➕ New empty window** to add more.
+   - **Automatically.** The first time a script writes to a window —
+     `#capture solar`, `#win ckstat ...` from an imported CMUD package, or
+     `cecho("mywin", ...)` from a Mudlet one — that window's pane **creates
+     itself** in place of the chat panel.
+3. Click **⚙** on any pane to tick what it shows: any capture window plus
+   every chat channel (`OOC`, `Clan`, `Tell`, …). Want all chats in one
+   window? Tick them all (or use **+ New chat window**). Want a channel in
+   its **own** window? Click the **↗** next to it in the ⚙ list to break it
+   out into a fresh pane. Chat lines keep their colours in dock mode but show
+   as plain lines — no bubbles, no tell dropdown.
 4. Arrange with the mouse: drag a pane's **header onto another pane**
    to merge them; drag it to a pane's **edge** to split a new
    row/column; drag the **dividers** to resize; **×** closes a pane
@@ -179,6 +187,59 @@ Dock mode brings them back:
 Anything you never route to a pane keeps printing in the terminal as
 `[window] text`, so a half-set-up dock never loses anything. `#clr
 <window>` clears that pane.
+
+**Prefer a free-floating layout?** Turn on **Settings → Floating windows
+(MDI)** instead. Now the terminal, your capture/chat windows, and the stat
+panels (Stats / Tracker / Affects) each become a floating window you can lay
+out exactly like an old CMUD profile.
+
+Each window's title bar has: its **⚙** settings (right next to the name),
+**A− / A+** to set that window's text size, **✎** rename (any window —
+terminal, chat, stats), **⤒** bring to front, **⤓** send behind, **—**
+minimise, **▣** maximise, **×** close (clicking any window also raises it).
+**Move** a window by dragging its title bar (they can overlap); **resize**
+from **any edge or corner** — the cursor turns into the Windows-style resize
+arrows, so there are no handles to hunt for. Drag a window toward a screen
+**edge or corner** to snap-tile it (left/right half or a quarter; dragging no
+longer jumps to full-screen — use **▣** for that). Add windows from the
+**＋ window** menu in the top-right.
+
+A few per-window extras:
+
+- **Chat windows** — make a window, open its **⚙**, and tick the channels
+  (OOC, Clan, Tell, …) you want it to collect; **↗** beside a channel breaks
+  it into its own window.
+- **Button panels** — a window's **⚙ → 🔘 Buttons…** lets you fill it with
+  one-click command buttons and on/off toggles. Toggles glow **green when
+  ON** and **red when OFF**, and the buttons wrap to fill the window.
+- **Stats your way** — a Stats window's **⚙** lets you tick which sections
+  show (Combat / Attributes / Wealth), and **↗** breaks a section out into
+  its own window.
+
+The whole layout is saved per character. (Floating mode and the docked-pane
+mode are independent — pick whichever you prefer in Settings.)
+
+## Keybindings (desktop)
+
+**Settings → Keybindings** turns any key into a shortcut. Click **Add
+keybinding**, press the key (or a combo like **Ctrl+1** or **Shift+F2**),
+confirm it, then choose what it does:
+
+- **Custom command** — type any command to send.
+- **Run an alias** — pick one of your saved aliases.
+- **Toggle a timer** — pick a timer; the key flips it on/off.
+
+Your shortcuts are listed right there, each with a **✕** to remove it, plus a
+**Reset all** if you want to start over.
+
+One rule keeps it out of your way: a **bare key** (like just **1**) fires when
+your command line is **empty** — its normal resting state between commands —
+so you just press the key, no clicking-away needed. Once you've started typing
+a command (the input has text), **1** types normally so you can still write
+things like `kill 2.goblin`. Combos that use **Ctrl / Alt** fire any time.
+(Shift on its own counts as a bare key, so **Shift+2** still types **@** while
+you're writing.) Keybindings are saved per character and travel with
+**Profile sync**.
 
 ## Profile sync — take everything with you
 

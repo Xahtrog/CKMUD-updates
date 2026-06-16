@@ -158,6 +158,30 @@ Selecting text in the top pane copies it cleanly (no live-data interleaving).
 
 ---
 
+## Dock mode — capture windows (Desktop)
+
+Dock mode replaces the chat panel with **dockable capture windows** — named panes that collect specific lines (chat channels, quest spam, a script's output). Turn it on in **Settings → Dock mode** (per character; off by default).
+
+**Make a window — no script required:**
+
+- With dock mode on and nothing docked yet, the empty area shows **➕ New window** (a blank pane you fill yourself) and **➕ New chat window — all channels combined** (one pane pre-loaded with every chat channel).
+- From any pane's **⚙** menu, **➕ New empty window** adds another pane.
+- Windows still auto-create the first time a script writes to one (`#capture <name>`, `#win <name> …`, or a Mudlet `cecho("name", …)`).
+
+**Choose what a window shows** — click **⚙** and tick any capture window or chat channel (`OOC`, `Clan`, `Tell`, …). All chats in one window? Tick them all. A channel in its **own** window? Click the **↗** beside it to break it out into a fresh pane.
+
+**Arrange** — drag a pane's **header** onto another pane to merge, onto a pane **edge** to split a new row/column, and the **dividers** to resize. **✎** renames a pane; **×** closes it (its text falls back to the terminal as `[window] …`, nothing is lost).
+
+**Buttons on a pane** — **⚙ → Buttons…** adds your own buttons: one-click commands/aliases, or two-state toggles (e.g. label `Task`, ON `zsafe Tasks on`, OFF `zsafe Tasks off`) that show `[ON]`/`[OFF]`, with a size slider.
+
+Your dock layout is remembered per character, and the routing (which windows show what) syncs to your other PCs via Profile Sync.
+
+**Floating-window (MDI) alternative.** For a full CMUD-style free layout, turn on **Settings → Floating windows (MDI)** instead of the docked panes. The terminal, capture/chat windows, and stat panels (Stats / Tracker / Affects) each become a floating window. Title bar (left→right): the window's **⚙** (next to its name), **A−/A+** text size, **✎** rename (any window), **⤒** bring to front, **⤓** send behind, **—**/**▣** minimise/maximise, **×** close (clicking a window also raises it). Drag the **title bar** to move (overlap allowed); **resize** from **any edge or corner** — the cursor shows Windows-style resize arrows (no visible handles); drag to a screen **edge/corner** to snap-tile (half or quarter; dragging no longer force-maximises — use **▣** for full). Add windows from the **＋ window** menu (top-right). Per-window: a chat window's **⚙** ticks which channels it collects (**↗** breaks one out); **⚙ → 🔘 Buttons…** fills a window with command/toggle buttons (toggles glow green ON / red OFF); a Stats window's **⚙** picks which sections show (Combat / Attributes / Wealth, **↗** to break one out). Layout is saved per character; floating mode and docked-pane mode are independent toggles.
+
+**Keybindings (Desktop).** **Settings → Keybindings** → **Add keybinding** → press a key or combo (e.g. **Ctrl+1**, **Shift+F2**) → confirm → choose a **custom command**, a saved **alias**, or a **timer** (a timer key toggles it on/off). Each binding has a **✕** to remove; **Reset all** clears them. A bare key (e.g. **1**) fires when the command line is **empty** (resting) or unfocused — just press it, no clicking-away needed; while you're mid-command (input has text) it types normally. **Ctrl/Alt** combos fire anywhere. Saved per character and carried by **Profile Sync**.
+
+---
+
 ## Recording Wizard — Capturing Aliases
 
 Open the Tools drawer → **Aliases** tab → tap the **Record** button. A floating red **STOP** button appears over the terminal.

@@ -846,6 +846,20 @@ These Mudlet globals do what Mudlet scripts expect:
 
 The shim implements `f"text {var}"` by scanning the **calling function's local variables** (plus globals) and supports dotted paths like `{player.name}`.  It does **not** see closure **upvalues**, and `{...}` cannot contain arbitrary expressions (`{a+b}`, `{t[1]}`, `{obj:method()}` won't evaluate).  When a name can't be resolved, the `{name}` text passes through literally — no error is raised.  If your interpolation references an upvalue or expression, switch to `string.format` or concatenation.
 
+### Capture windows (dock mode)
+
+Dock mode (**Settings → Dock mode**) shows **named capture windows** as dockable panes. Scripts feed them:
+
+- `#win <name> <text>` — append a line to window `<name>` (creates it on first write).
+- `#capture <name>` — route the current matched line(s) into window `<name>` (CMUD/ZS style); `#capture` with no name / `C-` stops capturing.
+- `#clr <name>` — clear a window.
+- From Lua: **`mud._winOut(name, text)`** or the Mudlet-compat **`echoUserWindow(name, text)`** — same effect.
+
+Two things to know (build 124+):
+
+- **You no longer need a script to make a window.** The dock UI has **➕ New window** / **➕ New chat window (all channels combined)**, the ⚙ menu has **➕ New empty window**, and **↗** beside any channel breaks it into its own pane — so a shareable "chat window" plugin is usually unnecessary.
+- **Chat channels are auto-captured** to `chan:<Name>` sinks carrying the real, **coloured** line — just tick them in any pane's ⚙. Re-echoing chat with `_winOut` / `echoUserWindow` instead produces a **plain-text** copy and **duplicates** the channel sink, so prefer the native `chan:*` route.
+
 ### Safe stubs (won't crash, won't really work)
 
 These are callable and return neutral values so ported scripts keep running, but they have **no real effect** — CKMud has no editable screen-buffer model:
