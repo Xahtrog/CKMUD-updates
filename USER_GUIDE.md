@@ -103,6 +103,8 @@ OOC, Chat, Quest, Event, Raid, Clan, Auction, Group, Tell, Say, Imm, Info, Gaunt
 
 Only a few are **visible** by default (OOC, Group, Say, Tell, Auction). Open Tools → Options → Channels to toggle visibility, change tab order, and pick which channels contribute to the chat-tab unread badge.
 
+On a **non-ckmud MUD**, the built-in default channels are hidden and not detected — you only see your own **custom** channels there (a default you have explicitly retargeted with a pattern override still works).
+
 ### Custom channels
 You can add up to 11 of your own per session. Tools → Options → Custom Channels → Add. Provide a regex pattern that matches the channel format (case-insensitive). Example: `^\[Crew:` to capture a channel like `[Crew: Bob shouts hello]`.
 
@@ -248,6 +250,9 @@ CKMud supports two plugin formats:
 
 Drop `.tt` or `.lua` files into the folder. Open Tools → **Plugins** to see what loaded; errors are shown per file.
 
+### Per-character vs. universal plugins
+Each character has its own sub-folder named `<Character>@<server>` (e.g. `Gorthax@ckmud.com`). Files there load **only for that character**. Anything in the plugins root — loose files, or any folder *without* an `@` in its name — is **universal** and loads for every character. New scripts created via **Plugins → New script** drop into the active character's folder, and the Plugins window only lists your own character's folder, not other characters'.
+
 ### Custom plugin folder (Android: SAF)
 Tools → Options → **Plugin folder** → pick any directory on your device (Downloads, Documents, Google Drive). The app uses Android's Storage Access Framework — your folder choice persists across reboots. The app copies the `.tt` and `.lua` files into its cache for reading and refreshes on every Reload.
 
@@ -266,6 +271,37 @@ If a script author (or you) hosts CKMud `.lua` files online — for example in a
 - `ckupdate <name> <url>` — one-off: grab a single file.
 
 It only fetches already-CKMud-ready `.lua` files (it does not convert Mudlet packages), over http/https, capped at 5 MB. (Native/Desktop engine.)
+
+---
+
+## Organising scripts & plugins into folders
+
+Triggers, aliases, timers and plugins can all be sorted into **folders** to keep long lists manageable.
+
+**Script folders (Triggers / Aliases / Timers).** Open any of them in Tools. Each editor has a **Folder** box — type a name (or tap a folder chip) and the item moves into that folder. Folders show as collapsible 📁 headers in the list. Desktop also has a **📁+ Folder** button to pre-create one.
+
+**Select & move several at once.**
+- **Desktop:** click **☑ Select**, tick the items you want, then **Move to…** and pick an existing folder, *no folder*, or **➕ New folder**.
+- **Android:** **long-press** any item to start selecting, tick more, tap **Move to…**, choose a folder, and confirm.
+
+**Plugin folders.** The Plugins window shows your folders the same way — including folders **nested inside your character's folder** — with short file names instead of long paths. You can **rename** and **delete** your own folders, **rename** plugin files, and **select multiple plugins** to move them into a folder at once. Your character's own `<Character>@<server>` profile folder is system-managed and can't be renamed or deleted (that name is how the client knows which character the plugins belong to).
+
+All of this travels with **Profile Sync** — your folders, subfolders, scripts and plugin files rebuild on your other devices.
+
+### Importing Mudlet / CMUD packages
+
+Tools → **Plugins → Import** takes a Mudlet `.mpackage` / `.xml` or a CMUD `.pkg`. An **import wizard** then asks two things, each explained on screen:
+
+- **Where it goes** — *this character only*, or *universal* (all your characters).
+- **How triggers convert** — *Auto* (simple "send" triggers become native, editable triggers you can open in Tools; anything with real Lua logic stays a plugin) or *Keep everything as a Lua plugin*.
+
+Not happy with the result? Delete it in Plugins / Tools and re-import with the other option. (Package import is still beta — only import packages you trust.)
+
+---
+
+## Celestial Compendium (ckmud only)
+
+A built-in item & mob database. Open **📖 Compendium** (desktop top bar / Android Tools drawer) to search the whole game without leaving the client. Search by name and filter by type, tier, wear slot, zone, bosses or legendaries; open any entry for its full stats, affections, special effects, and what drops it (or, for a mob, its drop list). Item/mob names render in their real in-game colours and rarity is badged. Only shown while connected to the official ckmud game (ckmud.com).
 
 ---
 

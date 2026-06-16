@@ -53,6 +53,20 @@ reacts — when the game says `You are thirsty.`, send `drink tears`. A
 (name, pattern, commands), an Enabled toggle, and a **Record** button that
 captures what you do in-game and turns it into an alias for you.
 
+**One trigger, many lines.** A trigger can watch for several different
+lines at once — click **➕ Add another pattern** in the trigger editor and
+add as many as you want, then choose **fire when ANY of these match** (the
+usual case) or **ALL of these** (only when every line is present). It runs
+the same one set of commands no matter which line showed up — so a "combo
+reset" that should fire on a combo break, a dodge, a daze ending, *or* a
+new enemy is a single trigger instead of eight.
+
+**Folders.** Sort triggers, aliases and timers into folders to keep big lists
+tidy — set the **Folder** field in any editor, or pick several at once
+(**☑ Select** on desktop, **long-press** on Android), tap **Move to…** and
+choose a folder (or make a new one). Folders sync to your other devices with
+everything else.
+
 When you outgrow the forms, the **Advanced Editor** shows the raw TinTin
 source with syntax highlighting, find & replace, and live error checking.
 
@@ -73,6 +87,16 @@ client, and they're live. This is how you share scripts with clanmates —
 one file, drop it in, done. Your imported and downloaded scripts stay put
 through client updates.
 
+**Per-character vs. shared.** Each character gets its own sub-folder named
+`<Character>@<server>` (for example `Gorthax@ckmud.com`). Files inside it
+load **only for that character**. Anything left loose in the main
+`plugins\` folder — or in any folder *without* an `@` in its name — is
+**universal** and loads for every character. So a character's personal bot
+goes in their folder, and shared clan scripts go in the root. New scripts
+you make with **Plugins → New script** drop straight into the character
+you're on, and you only ever see your own character's folder in the
+Plugins window, never anyone else's.
+
 Three levels of on/off, all in the Plugins window (hover any button
 for a description): the **group ⏻** disables a whole folder, the
 **file ⏻** disables one file, and **≡⏻** opens a list of every single
@@ -81,24 +105,46 @@ preview its script, ✎ to open the file in the editor. Per-trigger
 choices apply instantly, stick per character, survive re-imports, and
 follow you via Profile sync.
 
+**Folders, rename & move.** The Plugins window shows your folders — including
+folders nested inside a character's folder — with short file names instead of
+long paths. **Rename** or **delete** your own folders, **rename** files, and
+**select several plugins** (long-press on Android) to **move** them into a
+folder at once. Your character's `<Character>@<server>` folder is protected
+from rename/delete, since that name is how the client tracks who owns the
+plugins.
+
 ## Importing Mudlet packages
 
-If you have a Mudlet `.mpackage` (like the CK package), don't unzip it —
-import it: **TOOLS → Plugins → Import from Mudlet…** and pick the file.
-The client converts the whole package into a single plugin automatically.
+If you have a Mudlet `.mpackage` / `.xml` (like the CK package), don't unzip
+it — import it: **TOOLS → Plugins → Import** and pick the file. An **import
+wizard** then asks where it should go (**this character** or **all
+characters**) and how to handle triggers: **Auto** turns simple "send"
+triggers into native, **editable** CKMud triggers you'll find under
+Tools → Triggers, while anything with real logic stays a plugin; or
+**Keep as Lua** imports the whole thing as-is. Not happy with the result?
+Delete it and re-import the other way.
 
-Imported packages load in **SAFE mode**: any bots inside can't send a
-single command until you arm them. Type `cksafe` to see the toggles —
+Anything that stays a Lua plugin loads in **SAFE mode**: bots inside can't
+send a command until you arm them. Type `cksafe` to see the toggles —
 `cksafe on` arms the master switch, then enable the specific bot you want
-(e.g. `cksafe zetabot on`). Anything *you* type is never affected. Three
-helper commands once a package is loaded: `cksafe` (bot switches),
-`ckaliases` (every alias it added), `cktriggers` (every trigger, with
-status).
+(e.g. `cksafe zetabot on`). Anything *you* type is never affected. Helper
+commands once a package is loaded: `cksafe` (bot switches), `ckaliases`
+(aliases it added), `cktriggers` (triggers, with status).
 
 CMUD `.pkg` files import the same way. Each CMUD class folder becomes
 its own file (with `zsafe` class toggles), and triggers that weren't in
 any class are sorted into `_root_a` … `_root_z` files so even a huge
 flat CMUD tree stays browsable.
+
+## Celestial Compendium (ckmud only)
+
+A built-in item & mob guide. Click **📖 Compendium** (desktop top bar, or
+the Android Tools drawer) and search the whole game world without leaving
+the client — filter by type, tier, wear slot, zone, bosses or legendaries,
+and open any entry for its stats, bonuses, special effects, and what drops
+it (or, for a mob, what it drops). Names show in their real in-game
+colours and rare gear is badged. Only available while you're connected to
+the official ckmud game.
 
 ## Dock mode — your own capture windows (desktop)
 
@@ -161,6 +207,11 @@ updater then flags that exact build with a warning so you don't
 re-install it by accident; updating becomes one click again as soon as
 a newer build ships. Updates are always manual — nothing installs by
 itself.
+
+On **Android**, a **⬆ Check for updates** button sits right on the main
+menu (and in Settings) — tap it any time and it tells you whether you're
+up to date or offers the new build to download and install. If a newer
+build is already waiting, the menu button says so.
 
 ## Playing on your phone
 

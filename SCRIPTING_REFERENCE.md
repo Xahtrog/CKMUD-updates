@@ -127,6 +127,15 @@ commands: #var lastxp %1;#note Just got @lastxp XP
 
 Use named groups, lookaheads, character classes — anything Java's `java.util.regex.Pattern` supports.
 
+### Multiple patterns (one trigger, many lines)
+A trigger can watch for **several** patterns at once. In the editor, click **➕ Add another pattern** and add as many lines as you want; they all use the trigger's same **Is regex** / **Case sensitive** settings.
+
+Choose how they combine:
+- **Fire when ANY of these match** (default) — the body runs as soon as *any* one pattern matches the line. Captures come from the pattern that matched.
+- **ALL of these** — the body runs only when *every* pattern matches the **same** line.
+
+This collapses a pile of duplicate single-pattern triggers into one: e.g. a single "combo reset" that fires on a combo break, a dodge, a daze ending, *or* a new enemy appearing — all driving the same body. In the save file the extra lines are stored as `extraPatterns` and the mode as `matchAll`; they sync and export/import with the trigger.
+
 ### Common trigger patterns
 | Goal | Pattern | Commands |
 |---|---|---|
@@ -137,6 +146,9 @@ Use named groups, lookaheads, character classes — anything Java's `java.util.r
 
 ### Trigger from selection
 Select text in the terminal → action bar → **Make Trigger**. Pre-fills the pattern field with the selected text.
+
+### Folders & bulk-move
+Triggers, aliases and timers can each be sorted into **folders**. In the editor, set the **Folder** field (or tap a folder chip) to put an item in a folder; it then appears under a collapsible 📁 header in the list. To reorganise in bulk, use **☑ Select** (desktop) or **long-press** (Android) to tick several items, then **Move to…** → an existing folder, *no folder*, or **➕ New folder**. The folder is stored as `group` on each item, and syncs / exports with it.
 
 ---
 
@@ -404,6 +416,11 @@ Sprintf-like, but using `$1..$9` placeholders and `$*` for all args:
 ### Wait widget
 Each active `#wait` registers in a per-session WaitRegistry. The floating wait widget (see [USER_GUIDE.md](./USER_GUIDE.md#wait-widget)) shows live countdowns for all pending waits.
 
+### Stopping a running script
+- **`#halt`** stops the *rest of the current body* (the script author's `return`); it bubbles out of `#if` / `#while` / `#switch` / `#foreach`.
+- **`--`** (or whatever your MUD uses to clear its action queue) is just a normal command — it goes to the **server**. A combo built as "send all commands at once" needs nothing more: send `--` first and the server queue is wiped before the new commands land. This is the simplest, lag-free pattern — no client-side `#wait` chain to stall.
+- A `#wait` that has already been scheduled fires as its own task, so `#halt` in the current body won't cancel an *already-waiting* step, and timers keep running (`#timer <name> stop` stops one). There is no single client-side "stop everything at once" command yet.
+
 ---
 
 ## Repeat (`#N`) prefix
@@ -666,7 +683,9 @@ CKMud exports a single JSON file containing scripts + custom channels for one ch
         "commands": "flee",
         "enabled": true,
         "caseSensitive": false,
-        "isRegex": false
+        "isRegex": false,
+        "extraPatterns": ["You are no longer dazed.", "A door opens and"],
+        "matchAll": false
       }
     ],
     "timers": [
@@ -720,6 +739,15 @@ The Android **Import** flow lets you pick a category (alias/trigger/timer) and m
 
 Replaces ALL scripts + custom channels for the target character. Confirm dialog appears first. Use this for character migration.
 
+### Importing Mudlet / CMUD packages
+
+Tools → **Plugins → Import** accepts a Mudlet `.mpackage` / `.xml` or a CMUD `.pkg`. An **import wizard** asks two things first:
+
+- **Destination** — *this character only* (drops into `<Character>@<server>/`) or *universal* (the plugins root, all characters).
+- **Convert mode** — *Auto*: simple **send-only** triggers are converted to **native, editable CKMud triggers** (added to Tools → Triggers and persisted); anything with real logic stays a Lua plugin. *Keep everything as a Lua plugin*: imports as-is, no native triggers.
+
+Conversion is best-effort and beta — only import packages you trust, and if a result isn't right, delete it and re-import with the other option. (`ckupdate` does **not** convert packages; it only pulls already-CKMud `.lua` files.)
+
 ---
 
 ## Limitations & gotchas
@@ -758,7 +786,7 @@ This section is the "you'll thank yourself later" list. Read it before authoring
 
 ### Plugins
 
-1. **Subdirectories are NOT recursed.** Drop your `.tt` and `.lua` files flat in the plugin folder.
+1. **Subdirectories load as folders.** Files in subfolders are loaded and shown as collapsible 📁 folders in the Plugins window (the old "flat only" limit is gone) — including folders nested inside a character's `<Character>@<server>/` profile folder. Loose files and folders without an `@` are universal.
 2. **`.tt` and `.lua` files are loaded in alphabetical order.** Use a numeric prefix (e.g. `00-shared.lua`, `10-combat.lua`) if loading order matters.
 3. **Plugin scripts and user-authored scripts coexist.** Reload only wipes plugin entries.
 4. **Unknown `.tt` directives error but don't block the file** — the rest of the file still loads.
