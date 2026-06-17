@@ -65,7 +65,14 @@ new enemy is a single trigger instead of eight.
 tidy — set the **Folder** field in any editor, or pick several at once
 (**☑ Select** on desktop, **long-press** on Android), tap **Move to…** and
 choose a folder (or make a new one). Folders sync to your other devices with
-everything else.
+everything else. On desktop the list shows just each script's **name**, and
+folders **stay collapsed** the way you left them after you close and reopen
+Tools.
+
+**Saving (desktop).** In the alias / trigger / timer editor, **Save** and
+**Cancel** sit at the top of the panel so they're always reachable, and a
+brief **✓ Saved** appears next to the button to confirm the change was
+written.
 
 When you outgrow the forms, the **Advanced Editor** shows the raw TinTin
 source with syntax highlighting, find & replace, and live error checking.
