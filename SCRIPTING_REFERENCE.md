@@ -741,12 +741,34 @@ Replaces ALL scripts + custom channels for the target character. Confirm dialog 
 
 ### Importing Mudlet / CMUD packages
 
-Tools → **Plugins → Import** accepts a Mudlet `.mpackage` / `.xml` or a CMUD `.pkg`. An **import wizard** asks two things first:
+Tools → **Plugins → Import** accepts a Mudlet `.mpackage` / `.xml` or a CMUD `.pkg`. An **import wizard** asks up front:
 
 - **Destination** — *this character only* (drops into `<Character>@<server>/`) or *universal* (the plugins root, all characters).
 - **Convert mode** — *Auto*: simple **send-only** triggers are converted to **native, editable CKMud triggers** (added to Tools → Triggers and persisted); anything with real logic stays a Lua plugin. *Keep everything as a Lua plugin*: imports as-is, no native triggers.
+- **Safety gate** — *On* (default) or *Off* (see below).
+- **Control command** — the literal keyword you'll type to arm/disarm the package; blank = `<package>safe`.
 
 Conversion is best-effort and beta — only import packages you trust, and if a result isn't right, delete it and re-import with the other option. (`ckupdate` does **not** convert packages; it only pulls already-CKMud `.lua` files.)
+
+### The safety layer (`<package>safe`)
+
+Every imported package is prepended with a generated **safety + toggle layer** so a freshly-imported bot can't start hammering the MUD the moment it loads. It works at two levels:
+
+- **Send gate (gate *On*).** The package's `send` / `sendAll` / `expandAlias` are wrapped so a command only goes out **during an armed timer tick**. This neuters auto-firing scripts/timers until you arm them. **Aliases you type yourself are never gated** — the engine flags user-initiated alias dispatch (`mud._inUserAlias`) and the gate always lets those sends through. (Earlier builds gated alias sends too, which silently broke every imported alias — fixed.)
+- **Timer throttle.** Imported recurring timers route through a wrapper that respects the master switch, per-feature switches, and a `send_gap` anti-flood delay.
+
+Control it in-game with the **control command** (default `<package>safe`, e.g. `gelidasafe`):
+
+| Command | Effect |
+| --- | --- |
+| `<name>` | show all switches + state |
+| `<name> on` / `off` | master arm / disarm |
+| `<name> <feature> on` | arm one feature (auto-arms master) |
+| `<name> gap 1.5` | seconds between bot ticks |
+| `<name> block <word>` / `allow <word>` | stop / allow the bot sending `<word> …` |
+| `<name> debug on` | trace what the bot sends |
+
+Choosing **gate *Off*** at import starts the package **armed**: master + features on and the send wrappers not installed, so its automation runs immediately (still throttled by `send_gap`). The `<name>` command still works to disarm. Re-import an older package after updating to regenerate its safety layer with these behaviors.
 
 ---
 

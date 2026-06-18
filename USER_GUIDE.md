@@ -314,12 +314,30 @@ All of this travels with **Profile Sync** — your folders, subfolders, scripts 
 
 ### Importing Mudlet / CMUD packages
 
-Tools → **Plugins → Import** takes a Mudlet `.mpackage` / `.xml` or a CMUD `.pkg`. An **import wizard** then asks two things, each explained on screen:
+Tools → **Plugins → Import** takes a Mudlet `.mpackage` / `.xml` or a CMUD `.pkg`. An **import wizard** then asks, each explained on screen:
 
 - **Where it goes** — *this character only*, or *universal* (all your characters).
 - **How triggers convert** — *Auto* (simple "send" triggers become native, editable triggers you can open in Tools; anything with real Lua logic stays a plugin) or *Keep everything as a Lua plugin*.
+- **Safety gate** — *On* (recommended): the package's auto-firing timers/scripts stay disarmed until you arm them, so an imported bot can't start sending the moment it loads. *Off*: timers/scripts run immediately. Either way, **aliases you type yourself always work** — they're never gated.
+- **Control command** (optional) — what you type to arm/disarm the package. Defaults to `<package>safe` (e.g. `gelidasafe`); set something short like `gsafe` if you prefer.
 
 Not happy with the result? Delete it in Plugins / Tools and re-import with the other option. (Package import is still beta — only import packages you trust.)
+
+---
+
+## Map (ckmud only)
+
+When you're connected to ckmud, GMCP feeds a live area/world/space map. Open it from the **🗺 Map** tile in the Tools sheet (Android) or the **🗺** button up top (desktop). It redraws the instant you move and centers on you.
+
+**Float vs Dock (Android).** The map window has a **Dock / Float** toggle:
+
+- **Float** — a movable, resizable, non-modal window you can drop anywhere on screen. It never dims the screen or steals focus; pinch to zoom. The map auto-fits its window and re-centers on you as you resize.
+- **Dock** — pins the map down the **top-right** as a full-height column and reflows the MUD text into the left side (TinTin-style), so nothing is covered. The docked column has three stacked areas:
+  - **Map** at the top (compact).
+  - **Here** — what's in the room: mobs grouped with `×count`, a `⚔` fighting tally, then items.
+  - **Chat** — a scrollable pane at the bottom. Tap **＋ channels** to choose which channels route here; those channels move **out of the chat drawer** into this window (seeded with recent history, then live). There's no input box — you still type in the normal command line. Your picks are saved per character.
+
+Tap **Float** (or **✕**) to undock and give the terminal its full width back.
 
 ---
 

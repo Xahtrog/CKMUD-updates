@@ -128,15 +128,23 @@ wizard** then asks where it should go (**this character** or **all
 characters**) and how to handle triggers: **Auto** turns simple "send"
 triggers into native, **editable** CKMud triggers you'll find under
 Tools → Triggers, while anything with real logic stays a plugin; or
-**Keep as Lua** imports the whole thing as-is. Not happy with the result?
-Delete it and re-import the other way.
+**Keep as Lua** imports the whole thing as-is. It also lets you set the
+**safety gate** (On/Off, below) and **rename the control command** if you'd
+rather type something short like `gsafe` than `<package>safe`. Not happy with
+the result? Delete it and re-import the other way.
 
-Anything that stays a Lua plugin loads in **SAFE mode**: bots inside can't
-send a command until you arm them. Type `cksafe` to see the toggles —
-`cksafe on` arms the master switch, then enable the specific bot you want
-(e.g. `cksafe zetabot on`). Anything *you* type is never affected. Helper
-commands once a package is loaded: `cksafe` (bot switches), `ckaliases`
-(aliases it added), `cktriggers` (triggers, with status).
+Anything that stays a Lua plugin loads in **SAFE mode** (unless you turned the
+gate off at import): the bots inside can't send a command until you arm them.
+Type `cksafe` to see the toggles — `cksafe on` arms the master switch, then
+enable the specific bot you want (e.g. `cksafe zetabot on`). **Commands you
+type yourself — including the package's aliases — always work**, gate or no
+gate. Helper commands once a package is loaded: `cksafe` (bot switches; named
+after the package, so it might be `gelidasafe`), `ckaliases` (aliases it
+added), `cktriggers` (triggers, with status).
+
+> Imported a package before this update and its aliases did nothing? That was
+> the gate swallowing alias commands — fixed. **Re-import** the package and
+> they'll work.
 
 CMUD `.pkg` files import the same way. Each CMUD class folder becomes
 its own file (with `zsafe` class toggles), and triggers that weren't in
@@ -287,6 +295,14 @@ like the dual joystick and a hotbar. The Plugins window has the same
 folder tree and per-trigger ≡⏻ switches as desktop, and your switch
 choices sync between phone and PC. Ask in OOC for the current download
 link.
+
+**The map on phone.** On ckmud, tap the **🗺 Map** tile in Tools for a live
+map. It opens as a movable, resizable floating window (pinch to zoom), or tap
+**Dock** to pin it down the right edge as a full-height column — the MUD text
+reflows to the left so nothing's covered. Docked, you also get a **here** list
+(who/what's in the room) under the map and a **chat** pane at the bottom: tap
+**＋ channels** to route chosen channels out of the chat drawer and into that
+pane (you still type in the normal command line). Tap **Float**/**✕** to undock.
 
 ## Stuck?
 
